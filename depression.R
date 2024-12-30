@@ -18,10 +18,18 @@ df<-select(x,
           gen = "Family History of Mental Illness",
           depression = "Depression")
 glimpse(df)
+#recoding the variables to prepare them
 df<-mutate(df,
            sex=ifelse(sex=="Male",0,1),
            suicth=ifelse(suicth=="Yes",1,0),
            gen=ifelse(gen=="Yes",1,0),
-           depression=ifelse(gen=="Yes",1,0)
-           )
-df$sleep<-as.factor(df$sleep)
+           depression=ifelse(depression=="Yes",1,0),
+           sleep=factor(sleep,
+                         levels = c("Less than 5 hours","5-6 hours","7-8 hours", "More than 8 hours"),
+                         ordered = TRUE
+                        ),
+           diets=factor(diets,
+                       levels = c("Unhealthy","Moderate","Healthy"),
+                       ordered = TRUE)
+)
+
